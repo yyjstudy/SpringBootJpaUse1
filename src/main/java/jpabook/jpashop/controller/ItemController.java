@@ -1,4 +1,4 @@
-package jpabook.jpashop.Controller;
+package jpabook.jpashop.controller;
 
 import jpabook.jpashop.domain.Item.Book;
 import jpabook.jpashop.domain.Item.Item;
@@ -64,15 +64,8 @@ public class ItemController {
     @PostMapping("items/{itemId}/edit")
     public String updateItem(@PathVariable("itemId") Long itemId, @ModelAttribute("form") BookForm form) {
 
-        Book book = new Book();
-        book.setId(form.getId());
-        book.setName(form.getName());
-        book.setPrice(form.getPrice());
-        book.setStockQuantity(form.getStockQuantity());
-        book.setAuthor(form.getAuthor());
-        book.setIsbn(form.getIsbn());
+        itemService.updateItem(itemId, form.getName(), form.getPrice(), form.getStockQuantity());
 
-        itemService.saveItem(book);
         return "redirect:/items";
     }
 }
